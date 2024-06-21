@@ -27,10 +27,13 @@ function TextForm(props){
     const handleUpClick = () => {
         let newText = text.toUpperCase();
         setText(newText);
+        props.showAlert("Converted to uppercase", "success")
     }
     const handleLoClick =() =>{
         let newText = text.toLowerCase();
         setText(newText);
+        props.showAlert("Converted to lowercase", "success")
+
     }
     const handleOnChange = (event) =>{
         setText(event.target.value)
@@ -39,6 +42,8 @@ function TextForm(props){
     const handleClearClick = () =>{
         let newText = "";
         setText(newText);
+        props.showAlert("text has been cleared", "success")
+
     }
 
     const [text, setText] = useState('');
@@ -48,7 +53,8 @@ function TextForm(props){
             <div className="container ">
                 <h3>{props.heading}</h3>
                 <div className="mb-3 ">
-                    <textarea className="form-control bg-body-tertiary border-2" id="myBox" value={text} onChange={handleOnChange} rows="8" ></textarea>
+                    <textarea className="form-control bg-body-tertiary" id="myBox" value={text} 
+                        onChange={handleOnChange} rows="8" ></textarea>
                 </div>
                 
                 <button className="btn btn-success me-2" onClick={handleUpClick}>Convert To Uppercase</button>
