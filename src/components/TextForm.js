@@ -48,26 +48,34 @@ function TextForm(props){
 
     const [text, setText] = useState('');
 
+    let myColor ={
+        backgroundColor: props.mode==='dark'? 'rgb(69 74 79)': 'rgb(238 241 245)',
+        color: props.mode==='dark'? 'white': 'black',
+        border: 'none'
+    }
+
     return(
         <div>
-            <div className="container ">
+            <div className="container my-3">
                 <h3>{props.heading}</h3>
                 <div className="mb-3 ">
-                    <textarea className="form-control bg-body-tertiary" id="myBox" value={text} 
-                        onChange={handleOnChange} rows="8" ></textarea>
+                    <textarea className="form-control" id="myBox" value={text} 
+                        onChange={handleOnChange} rows="8" style={myColor}></textarea>
                 </div>
                 
-                <button className="btn btn-success me-2" onClick={handleUpClick}>Convert To Uppercase</button>
-                <button className="btn btn-success me-2" onClick={handleLoClick}>Convert To Lowercase</button>
-                <button className="btn btn-success" onClick={handleClearClick}>Clear</button>
+                <button disabled= {text.length===0} className={`btn btn-outline-${props.mode==='dark'?'light' : 'dark'} me-2`} onClick={handleUpClick}>Convert To Uppercase</button>
+                <button disabled= {text.length===0} className={`btn btn-outline-${props.mode==='dark'?'light' : 'dark'} me-2`} onClick={handleLoClick}>Convert To Lowercase</button>
+                <button disabled= {text.length===0} className={`btn btn-outline-${props.mode==='dark'?'light' : 'dark'} me-2`} onClick={handleClearClick}>Clear</button>
 
-            </div>
-            <div className="conatainer my-3 mx-2">
+                <div className="conatainer my-3">
                 <h3>Your Text Summary</h3>
-                <p>{text.split(" ").length} words and {text.length}</p>
+                <p>{text.split(/\s+/).filter((element)=>{return element.length !==0}).length} words and {text.length}</p>
                 <h4>Preview</h4>
                 <p>{text}</p>
             </div>
+
+            </div>
+            
             {/* <button className="btn btn-success" onClick={mode}>{btnText}</button> */}
             
         </div>
